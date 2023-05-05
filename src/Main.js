@@ -3,6 +3,7 @@ import { Button, Form, ListGroup } from "react-bootstrap";
 import LocationIQ from "./LocationIQ";
 import axios from "axios";
 import Map from "./Map";
+import Error from "./Error";
 
 class Main extends React.Component{
   constructor(props) {
@@ -13,6 +14,7 @@ class Main extends React.Component{
       cityName: '',
       lat: '',
       lon: '',
+      error: false
     }
   }
 
@@ -24,6 +26,7 @@ class Main extends React.Component{
 
   handleExplore = async (e) => {
     e.preventDefault();
+    try{
     let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`
     const response = await axios.get(url);
     console.log(response.data[0]);
@@ -34,6 +37,8 @@ class Main extends React.Component{
       lon: response.data[0].lon,
     })
     }
+    catch{this.setState({error: true})};
+  }
   
   render() {
     return(
@@ -53,7 +58,7 @@ class Main extends React.Component{
           <ListGroup.Item>The latitude for this location is {this.state.lat}</ListGroup.Item>
           <ListGroup.Item>The longitude for this location is {this.state.lon}</ListGroup.Item>
         </ListGroup>
-        
+
         <Map
           lat={this.state.lat}
           lon={this.state.lon}
@@ -63,7 +68,11 @@ class Main extends React.Component{
         null
         }
       </Form>
-      
+      {this.state.error &&
+      <>
+      <Error />
+      </>
+      }
     </>)
   }
 }
