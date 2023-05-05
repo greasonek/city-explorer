@@ -52,6 +52,7 @@ class Main extends React.Component{
           <ListGroup.Item>The latitude for this location is {this.state.lat}</ListGroup.Item>
           <ListGroup.Item>The longitude for this location is {this.state.lon}</ListGroup.Item>
         </ListGroup>
+        <LocationIQ/>
         </>
         :
         null
