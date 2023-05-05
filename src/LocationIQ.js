@@ -4,7 +4,7 @@ import React from "react";
 class LocationIQ extends React.Component{
   render(){
     return(
-      <p>location information</p>
+      <h3>Location Information</h3>
     )
   }
 }
