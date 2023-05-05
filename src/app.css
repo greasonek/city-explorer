@@ -1,0 +1,46 @@
+body {
+  background-color: ivory;
+}
+
+h1 {
+  font-family: 'Vina Sans', cursive;
+  font-size: 80px;
+  color:olivedrab;
+}
+
+.form-label {
+  padding:20px;
+  font-family: 'Instrument Serif', serif;  
+  font-size: 30px;
+  color:teal;
+}
+
+.form-control {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  padding:10px;
+}
+
+.btn {
+  font-family: 'Instrument Serif', serif;
+  font-size: 30px;
+  margin:10px;
+}
+
+h3 {
+  font-family: 'Instrument Serif', serif;
+  color:teal;
+  font-size: 30px;
+}
+
+img {
+  margin: 30px;
+}
+
+p {
+  font-family: 'Instrument Serif', serif;
+  color:teal;
+  font-size: 20px;
+  text-align: center;
+  margin: 30px;
+}

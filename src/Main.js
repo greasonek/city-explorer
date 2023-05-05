@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Form, ListGroup } from "react-bootstrap";
 import LocationIQ from "./LocationIQ";
 import axios from "axios";
+import Map from "./Map";
 
 class Main extends React.Component{
   constructor(props) {
@@ -11,8 +12,7 @@ class Main extends React.Component{
       city: '',
       cityName: '',
       lat: '',
-      lon: ''
-
+      lon: '',
     }
   }
 
@@ -31,8 +31,7 @@ class Main extends React.Component{
       displayInfo: true,
       cityName: response.data[0].display_name,
       lat: response.data[0].lat,
-      lon: response.data[0].lon
-
+      lon: response.data[0].lon,
     })
     }
   
@@ -47,17 +46,24 @@ class Main extends React.Component{
         <Button type="submit">Explore!</Button>
         {this.state.displayInfo ?
         <>
+        <LocationIQ/>
+
         <ListGroup>
           <ListGroup.Item>{this.state.cityName}</ListGroup.Item>
           <ListGroup.Item>The latitude for this location is {this.state.lat}</ListGroup.Item>
           <ListGroup.Item>The longitude for this location is {this.state.lon}</ListGroup.Item>
         </ListGroup>
-        <LocationIQ/>
+        
+        <Map
+          lat={this.state.lat}
+          lon={this.state.lon}
+        />
         </>
         :
         null
         }
       </Form>
+      
     </>)
   }
 }

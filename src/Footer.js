@@ -4,7 +4,7 @@ import React from "react";
 class Footer extends React.Component{
   render(){
     return(
-      <p>Emily Greason</p>
+      <p>&copy;Emily Greason</p>
     )
   }
 }
