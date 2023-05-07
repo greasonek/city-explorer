@@ -4,6 +4,7 @@ import LocationIQ from "./LocationIQ";
 import axios from "axios";
 import Map from "./Map";
 import Error from "./Error";
+import Weather from "./Weather";
 
 class Main extends React.Component{
   constructor(props) {
@@ -14,7 +15,9 @@ class Main extends React.Component{
       cityName: '',
       lat: '',
       lon: '',
-      error: false
+      error: false,
+      weatherForecast: []
+
     }
   }
 
@@ -36,8 +39,23 @@ class Main extends React.Component{
       lat: response.data[0].lat,
       lon: response.data[0].lon,
     })
+    this.showWeather();
     }
     catch{this.setState({error: true})};
+  }
+
+  showWeather = async () => {
+    try {
+      const url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}`
+      const response = await axios.get(url);
+      console.log(response.data);
+      this.setState({weatherForecast: response.data},
+      () => console.log(this.state.weatherForecast)
+      )
+    }
+    catch(error){
+      console.error(error.message);
+    }
   }
   
   render() {
@@ -59,6 +77,11 @@ class Main extends React.Component{
           <ListGroup.Item>The longitude for this location is {this.state.lon}</ListGroup.Item>
         </ListGroup>
 
+        {this.state.weatherForecast.length > 0 && 
+        <Weather 
+          weatherForecast={this.state.weatherForecast}
+        />}
+        
         <Map
           lat={this.state.lat}
           lon={this.state.lon}
@@ -66,7 +89,7 @@ class Main extends React.Component{
         </>
         :
         null
-        }
+        },
       </Form>
       {this.state.error &&
       <>
