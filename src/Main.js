@@ -49,13 +49,20 @@ class Main extends React.Component{
       const url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}`
       const response = await axios.get(url);
       console.log(response.data);
-      this.setState({weatherForecast: response.data},
+      this.setState({weatherForecast: response.data}, 
       () => console.log(this.state.weatherForecast)
       )
     }
     catch(error){
       console.error(error.message);
     }
+  }
+
+  resetError = () => {
+    this.setState({
+      error: false,
+      displayInfo: false
+    });
   }
   
   render() {
@@ -66,7 +73,7 @@ class Main extends React.Component{
           <Form.Label>Enter a city location for more information!</Form.Label>
           <Form.Control type="text" placeholder="Enter a city location here" onChange={this.handleInput} />
         </Form.Group>
-        <Button type="submit">Explore!</Button>
+        <Button type="submit" onClick={this.resetError}>Explore!</Button>
         {this.state.displayInfo ?
         <>
         <LocationIQ/>
