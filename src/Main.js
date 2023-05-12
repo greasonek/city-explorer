@@ -5,6 +5,7 @@ import axios from "axios";
 import Map from "./Map";
 import Error from "./Error";
 import Weather from "./Weather";
+import Movies from "./Movies";
 
 class Main extends React.Component{
   constructor(props) {
@@ -16,7 +17,8 @@ class Main extends React.Component{
       lat: '',
       lon: '',
       error: false,
-      weatherForecast: []
+      weatherForecast: [],
+      movieArr: []
 
     }
   }
@@ -29,32 +31,50 @@ class Main extends React.Component{
 
   handleExplore = async (e) => {
     e.preventDefault();
+    let lat,lon;
     try{
     let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_KEY}&q=${this.state.city}&format=json`
     const response = await axios.get(url);
     console.log(response.data[0]);
+    lat = response.data[0].lat;
+    lon = response.data[0].lon
     this.setState({
       displayInfo: true,
       cityName: response.data[0].display_name,
       lat: response.data[0].lat,
       lon: response.data[0].lon,
     })
-    this.showWeather();
-    }
+    // this.showWeather)
+  }
     catch{this.setState({error: true})};
+    this.showWeather(lat, lon);
+    this.showMovies();
   }
 
-  showWeather = async () => {
+
+  showWeather = async (lat, lon) => {
     try {
-      const url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.city}`
+      let url = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}&searchQuery=${this.state.city}`;
       const response = await axios.get(url);
-      console.log(response.data);
       this.setState({weatherForecast: response.data}, 
-      () => console.log(this.state.weatherForecast)
+      () => console.log(this.state.weatherForecast),
       )
     }
     catch(error){
       console.error(error.message);
+    }
+  }
+
+  showMovies = async () => {
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/movies?city=${this.state.city}`;
+      const response = await axios.get(url);
+      this.setState({movieArr: response.data},
+      () => console.log(this.state.movieArr),
+      )
+    }
+    catch(error){
+      console.log(error.message);
     }
   }
 
@@ -87,6 +107,11 @@ class Main extends React.Component{
         {this.state.weatherForecast.length > 0 && 
         <Weather 
           weatherForecast={this.state.weatherForecast}
+        />}
+
+        {this.state.movieArr.length > 0 &&
+        <Movies
+          movieArr={this.state.movieArr}
         />}
         
         <Map
