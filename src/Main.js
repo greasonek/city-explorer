@@ -6,6 +6,8 @@ import Map from "./Map";
 import Error from "./Error";
 import Weather from "./Weather";
 import Movies from "./Movies";
+import "./main.css";
+import "./movies.css"
 
 class Main extends React.Component{
   constructor(props) {
@@ -44,7 +46,6 @@ class Main extends React.Component{
       lat: response.data[0].lat,
       lon: response.data[0].lon,
     })
-    // this.showWeather)
   }
     catch{this.setState({error: true})};
     this.showWeather(lat, lon);
