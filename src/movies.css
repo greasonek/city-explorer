@@ -1,0 +1,17 @@
+.movies{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card{
+  width:400px;
+  
+}
+
+.card-title{
+  text-align: center;
+}
+
+.card-img-top{
+  align-items: center;
+}
