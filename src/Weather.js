@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Card } from "react-bootstrap";
 // import { ListGroup } from "react-bootstrap";
 
 
@@ -7,8 +8,12 @@ class Weather extends React.Component{
 
   
   render(){
-    const WeatherDays = this.props.weatherForecast.map(element => 
-    <WeatherDay element={element} />)
+  
+    const WeatherDays = this.props.weatherForecast.map((element, idx) => {
+      // console.log(element);
+    return <WeatherDay element={element} 
+      key={idx}
+    />})
     return(
       <>
       <h3>Weather Information</h3>
@@ -22,22 +27,26 @@ class Weather extends React.Component{
 }
 
 class WeatherDay extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      date: props.date,
-      description: props.description
-    }
-  }
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     date: props.date,
+  //     temp: props.temp,
+  //     description: props.description,
+  //     icon: props.icon
+  //   }
+  // }
   render(){
     return(
       <>
-     <div class="card">
-      <div class="card-body">
-      <h3 class="card-title">{this.props.element.date}</h3>
-      <p class="card-text">{this.props.element.description}</p>
-      </div>
-     </div>
+     <Card>
+      <Card.Body>
+        <img class="card-img-top" src={require(`./Img/icons/${this.props.element.icon}.png`)} alt={this.props.element.description}></img>
+      <Card.Title>{this.props.element.date}</Card.Title>
+      <Card.Text>{this.props.element.description}</Card.Text>
+      <Card.Text>{this.props.element.temp} {'\u00b0'}</Card.Text>
+      </Card.Body>
+     </Card>
       </>
     )
   }
