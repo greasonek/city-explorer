@@ -57,8 +57,9 @@ class Main extends React.Component{
     try {
       let url = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}&searchQuery=${this.state.city}`;
       const response = await axios.get(url);
+      console.log(response.data);
       this.setState({weatherForecast: response.data}, 
-      () => console.log(this.state.weatherForecast),
+      // () => console.log(this.state.weatherForecast),
       )
     }
     catch(error){
@@ -71,7 +72,7 @@ class Main extends React.Component{
       let url = `${process.env.REACT_APP_SERVER}/movies?city=${this.state.city}`;
       const response = await axios.get(url);
       this.setState({movieArr: response.data},
-      () => console.log(this.state.movieArr),
+      // () => console.log(this.state.movieArr),
       )
     }
     catch(error){
