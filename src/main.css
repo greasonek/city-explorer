@@ -1,8 +1,16 @@
 .card {
-  width:250px;
+  width:300px;
  
 }
 
 h3 {
   padding:20px;
+}
+
+.card-img-top{
+  padding-right: 70px;
+}
+
+.card-img {
+  padding-right:60px;
 }
