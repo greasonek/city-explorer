@@ -13,17 +13,10 @@ class Movies extends React.Component{
         key={idx}
       />)
     return(
-    <>
+      <>
       <h3>Movies</h3>
       {MovieStr}
-      {/* <ListGroup>
-        {this.props.movieArr.map(element =>
-          <ListGroup.Item key={element.movies}>{element.title} {element.overview}</ListGroup.Item>
-          )}
-        {console.log(this.props.movieArr)}
-      </ListGroup> */}
-
-    </>
+     </>
       )
   }
 }
@@ -35,7 +28,6 @@ class Movie extends React.Component{
       title: props.title,
       overview: props.overview,
       release_date: props.release_date
-      // image_url: props.poster_path,
     }
   }
   render(){
